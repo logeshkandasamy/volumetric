@@ -41,7 +41,21 @@ def main():
     
     #host="http://localhost:8080"
     os.system("locust -f locust.py --host=" + host + " --csv=" + resultsDir + resultfileprefix + timestr + " --no-web -c " + locustusers + " -r " + locusthatchrate + " -t " + runtime + "  --only-summary > ../log/locustTest.log ")
+    print("Executed successfully")
     
+    # results compare by two dates data
+    dates = utility._get_today_yesterday_dates_()    
+    file1 = resultfileprefix + dates[0] + "_requests.csv"
+    file2 = resultfileprefix + dates[1] + "_requests.csv"
+    # print(file1 , file2)
+    requestData = utility._result_compare_(resultsDir, file1, file2)
+    fileutils.write_data(resultsDir + "/requests_" + dates[0] + "_" + dates[1] + "_compared_results.json", requestData)
+    
+    
+    try: 
+        plotgraph._plot_graph_(resultsDir, file1, file2)
+    except Exception as e:
+        print(" Exception occurred while plotting : " + str(e))
     
 if __name__ == "__main__":
     main()
