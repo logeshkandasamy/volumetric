@@ -40,7 +40,7 @@ def main():
     #os.system("locust -f locust.py --host=http://localhost:8080  --csv=sample  --no-web -c 100 -r 1 -t 1m  ")
     
     #host="http://localhost:8080"
-    os.system("locust -f locust.py --host=" + host + " --csv=" + resultsDir + resultfileprefix + timestr + " --no-web -c " + locustusers + " -r " + locusthatchrate + " -t " + runtime + "  --only-summary > ../log/locustTest.log ")
+    os.system("locust -f locusttest.py --host=" + host + " --csv=" + resultsDir + resultfileprefix + timestr + " --no-web -c " + locustusers + " -r " + locusthatchrate + " -t " + runtime + "  --only-summary > ../log/locustTest.log ")
     print("Executed successfully")
     
     # results compare by two dates data
@@ -48,8 +48,8 @@ def main():
     file1 = resultfileprefix + dates[0] + "_requests.csv"
     file2 = resultfileprefix + dates[1] + "_requests.csv"
     # print(file1 , file2)
-    requestData = utility._result_compare_(resultsDir, file1, file2)
-    fileutils.write_data(resultsDir + "/requests_" + dates[0] + "_" + dates[1] + "_compared_results.json", requestData)
+    #requestData = utility._result_compare_(resultsDir, file1, file2)
+    #fileutils.write_data(resultsDir + "/requests_" + dates[0] + "_" + dates[1] + "_compared_results.json", requestData)
     
     
     try: 
